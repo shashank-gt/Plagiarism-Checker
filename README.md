@@ -40,7 +40,7 @@ System tools (for OCR, optional):
 
 **1. Tesseract OCR** (if OCR is required) — install and add to PATH (e.g., C:\Program Files\Tesseract-OCR\)
 
-**22. Poppler** (for pdf2image) — extract and add C:\poppler\Library\bin to PATH
+**2. Poppler** (for pdf2image) — extract and add C:\poppler\Library\bin to PATH
 
 **3. Python packages:**
 
@@ -53,12 +53,12 @@ pip install PyPDF2 pandas scikit-learn tqdm pdf2image pillow pytesseract opencv-
 
 2. Create submissions/ folder inside project and add all student PDF files:
 
-project_root/
-├─AssignmentChecker.py
-└─ submissions/
-   ├─ student1.pdf
-   ├─ student2.pdf
-   └─ ...
+project_root
+-AssignmentChecker.py
+- submissions/
+   - student1.pdf
+   - student2.pdf
+   - ...
 
 
 3. Install Python dependencies

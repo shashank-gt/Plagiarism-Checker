@@ -1,6 +1,6 @@
 # Plagiarism Detection System
 
-This project detects similarity between student assignment PDFs. It extracts text from PDF files (supports normal text PDFs and scanned PDFs via OCR), computes TF-IDF vectors, and uses cosine similarity to report pairwise similarity percentages. The program produces a CSV report listing suspicious pairs and a short summary of highly similar submissions.
+This project detects similarity between student assignment PDFs. It extracts text from PDF files, computes TF-IDF vectors, and uses cosine similarity to report pairwise similarity percentages. The program produces a CSV report listing suspicious pairs and a short summary of highly similar submissions.
 
 # Project Files
 

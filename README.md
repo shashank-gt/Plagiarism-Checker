@@ -54,7 +54,7 @@ pip install PyPDF2 pandas scikit-learn tqdm pdf2image pillow pytesseract opencv-
 2. Create submissions/ folder inside project and add all student PDF files:
 
 project_root/
-├─ AssignmentChecker.py
+├─AssignmentChecker.py
 └─ submissions/
    ├─ student1.pdf
    ├─ student2.pdf

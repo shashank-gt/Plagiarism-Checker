@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlagiScan — AI Plagiarism Detector</title>
+  <meta name="description" content="Upload multiple PDF or Word documents and detect plagiarism using advanced NLP and semantic AI models." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Background Orbs ─────────────────────────────────────── -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        </svg>
+      </div>
+      <span class="logo-text">Plagi<span class="accent">Scan</span></span>
+    </div>
+    <div class="badge">AI-Powered · NLP + Semantic</div>
+  </header>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero">
+    <h1>Detect Plagiarism<br/><span class="gradient-text">Instantly &amp; Accurately</span></h1>
+    <p class="subtitle">Upload handwritten scans, typed PDFs, or Word documents.<br/>Our ensemble AI compares them using TF-IDF, semantic embeddings &amp; n-gram analysis.</p>
+  </section>
+
+  <!-- ── Main Card ────────────────────────────────────────────── -->
+  <main>
+    <div class="card upload-card">
+      <h2 class="card-title">Upload Documents</h2>
+      <p class="card-sub">Select 2–20 files (PDF or DOCX) to compare</p>
+
+      <!-- Drop Zone -->
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <p class="drop-title">Drag &amp; drop files here</p>
+        <p class="drop-sub">or click to browse</p>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+          <input type="file" id="fileInput" multiple accept=".pdf,.docx,.doc" hidden />
+          <button class="btn-outline" id="browseBtn">Browse Files</button>
+          <button class="btn-outline" id="loadSamplesBtn" style="border-color: var(--accent2); color: var(--accent2);">Load Samples</button>
+        </div>
+
+      <!-- File Chips -->
+      <div class="file-chips" id="fileChips"></div>
+
+      <!-- Analyze Button -->
+      <button class="btn-primary" id="analyzeBtn" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        Analyze Documents
+      </button>
+    </div>
+
+    <!-- ── Loader ─────────────────────────────────────────────── -->
+    <div class="loader-wrap" id="loaderWrap" style="display:none">
+      <div class="loader-card">
+        <div class="spinner"></div>
+        <p class="loader-title" id="loaderTitle">Extracting text…</p>
+        <p class="loader-sub">Using OCR for scanned/handwritten documents</p>
+        <div class="loader-steps">
+          <span class="step active" id="step1">📄 Extracting</span>
+          <span class="step" id="step2">🧠 Embedding</span>
+          <span class="step" id="step3">📊 Scoring</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Results ────────────────────────────────────────────── -->
+    <div id="resultsSection" style="display:none">
+
+      <!-- Stats Row -->
+      <div class="stats-row" id="statsRow"></div>
+
+      <!-- Warnings -->
+      <div id="warningsBox" style="display:none" class="warnings-box"></div>
+
+      <!-- Similarity Rankings -->
+      <div class="card results-card">
+        <div class="results-header">
+          <h2 class="card-title">Similarity Rankings</h2>
+          <div class="legend">
+            <span class="dot red"></span>High &gt;70%
+            <span class="dot yellow"></span>Medium 40–70%
+            <span class="dot green"></span>Low &lt;40%
+          </div>
+        </div>
+
+        <div class="results-list" id="resultsList"></div>
+      </div>
+
+      <!-- Extracted Text Previews -->
+      <div class="card" id="previewCard">
+        <h2 class="card-title">Extracted Text Previews</h2>
+        <p class="card-sub">Click a document to expand its extracted content</p>
+        <div class="previews-grid" id="previewsGrid"></div>
+      </div>
+    </div>
+
+    <!-- ── Error ──────────────────────────────────────────────── -->
+    <div id="errorBox" style="display:none" class="error-box"></div>
+  </main>
+
+  <footer>
+    <p>PlagiScan · Ensemble NLP · TF-IDF + Sentence-Transformers + Jaccard</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

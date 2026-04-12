@@ -67,10 +67,12 @@ def _semantic_similarity(texts: list[str]) -> np.ndarray:
 
     if not _sentence_model_loaded:
         try:
+            import torch
             from sentence_transformers import SentenceTransformer
-            _sentence_model = SentenceTransformer("all-MiniLM-L6-v2")
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+            _sentence_model = SentenceTransformer("all-mpnet-base-v2", device=device)
             _sentence_model_loaded = True
-            print("[INFO] Sentence-Transformers model loaded.")
+            print(f"[INFO] Sentence-Transformers model loaded on {device}.")
         except Exception as e:
             print(f"[WARN] Sentence-Transformers unavailable: {e}. Skipping semantic scoring.")
             _sentence_model_loaded = True  # mark as attempted

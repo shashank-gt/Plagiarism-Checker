@@ -34,7 +34,15 @@ PDF, Word (.docx), and scanned/handwritten files (OCR)
 
 ---
 
-## Run
+## Deployment on Render
+This app is configured for native deployment on Render via Docker.
+1. Connect your repository to Render.
+2. Render will automatically detect the `render.yaml` or `Dockerfile`.
+3. It installs necessary system packages (Tesseract, OpenCV gl dependencies) seamlessly.
+
+---
+
+## Run Locally
 
 ```bash
 git clone https://github.com/shashank-gt/Plagiarism-Checker.git
@@ -43,7 +51,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open: [http://localhost:5000](http://localhost:5000)
+Open: [http://localhost:10000](http://localhost:10000)
 
 ---
 
@@ -54,6 +62,9 @@ app.py
 plagiarism_engine.py
 text_extractor.py
 frontend/
+Dockerfile
+render.yaml
+Procfile
 ```
 
 ---

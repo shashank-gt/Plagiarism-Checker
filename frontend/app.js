@@ -196,7 +196,7 @@ async function runAnalysis() {
     }
   } catch (err) {
     hideLoader();
-    showError("Could not reach the server. Make sure the app is running on localhost:5000.");
+    showError("Could not reach the server. Please check your connection and try again.");
   } finally {
     // Re-enable button
     analyzeBtn.disabled = false;

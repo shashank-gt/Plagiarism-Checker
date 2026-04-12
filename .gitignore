@@ -18,3 +18,14 @@ env/
 .vscode/
 .idea/
 .DS_Store
+
+# Logs and Databases
+*.log
+*.sqlite3
+*.db
+instance/
+.webassets-cache
+
+# Testing & Coverage
+.coverage
+htmlcov/

@@ -1,4 +1,4 @@
-# Plagiarism Detection
+# Plag Check
 
 ![Status](https://img.shields.io/badge/Status-Deployment%20Ready-success)
 ![Python](https://img.shields.io/badge/Python-3.13-blue)
@@ -51,7 +51,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open: [http://localhost:10000](http://localhost:10000)
+Open: [http://localhost:5000](http://localhost:5000)
 
 ---
 

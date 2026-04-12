@@ -44,7 +44,7 @@ def static_files(filename):
 
 @app.route("/health")
 def health():
-    return jsonify({"status": "ok", "message": "Plagiarism Detection API running."})
+    return jsonify({"status": "ok", "message": "Plag Check API running."})
 
 
 # ─── Main Analysis Endpoint ──────────────────────────────────────────────────
@@ -131,7 +131,8 @@ def analyze():
 
 if __name__ == "__main__":
     print("="*60)
-    print("  Plagiarism Detection System")
-    print("  http://localhost:10000")
+    print("  Plag Check System")
+    port = int(os.environ.get("PORT", 5000))
+    print(f"  http://localhost:{port}")
     print("="*60)
-    app.run(host="0.0.0.0", port=10000, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=False)

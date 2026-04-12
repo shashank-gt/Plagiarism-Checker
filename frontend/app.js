@@ -1,5 +1,5 @@
 /**
- * app.js — PlagiScan Frontend Logic
+ * app.js — Plag Check Frontend Logic
  */
 
 // ── State ─────────────────────────────────────────────────────
@@ -42,10 +42,8 @@ if (loadSamplesBtn) {
   loadSamplesBtn.addEventListener("click", async (e) => {
     e.stopPropagation();
     const sampleFiles = [
-      "samples/Sample_A_Original.docx",
-      "samples/Sample_B_CopyPaste.docx",
-      "samples/Sample_C_Paraphrased.docx",
-      "samples/Sample_D_Different.docx"
+      "samples/xample1.pdf",
+      "samples/xample2.pdf"
     ];
     
     selectedFiles = [];

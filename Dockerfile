@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose port (Render automatically assigns one, but standard is usually needed for local docker)
-EXPOSE 10000
+EXPOSE 5000
 
 # Start Gunicorn server (Render automatically injects the PORT env variable)
-CMD gunicorn app:app -b 0.0.0.0:${PORT:-10000}
+CMD gunicorn app:app -b 0.0.0.0:${PORT:-5000}

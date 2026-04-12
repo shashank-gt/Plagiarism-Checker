@@ -53,9 +53,11 @@ if (loadSamplesBtn) {
       showLoader();
       loaderTitle.textContent = "Loading samples...";
       const fetchedFiles = [];
+      const isLocalClient = window.location.protocol === 'file:' || window.location.port === '5500';
+      const baseUrl = isLocalClient ? "http://127.0.0.1:5000" : "";
       
       for (const url of sampleFiles) {
-        const resp = await fetch("/" + url);
+        const resp = await fetch(baseUrl + "/" + url);
         if (!resp.ok) throw new Error("Failed to load " + url);
         const blob = await resp.blob();
         const filename = url.split("/").pop();
@@ -180,8 +182,12 @@ async function runAnalysis() {
   // Animate steps
   animateSteps();
 
+  // Auto-detect backend URL: If opened as a local file or Live Server, assume backend is at http://127.0.0.1:5000
+  const isLocalClient = window.location.protocol === 'file:' || window.location.port === '5500';
+  const baseUrl = isLocalClient ? "http://127.0.0.1:5000" : "";
+
   try {
-    const res = await fetch("/analyze", {
+    const res = await fetch(baseUrl + "/analyze", {
       method: "POST",
       body: formData,
     });

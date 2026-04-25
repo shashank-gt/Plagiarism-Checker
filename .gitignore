@@ -3,12 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Data & dynamically generated results
-submissions/
-*.pdf
-plagiarism_results.csv
-frontend/samples/
-
+# Allow tracking of sample PDFs
+!frontend/samples/*.pdf
 # Virtual environments
 venv/
 env/

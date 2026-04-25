@@ -28,7 +28,7 @@ MAX_FILES = 20
 MAX_FILE_SIZE_MB = 50
 
 
-# ─── Static Frontend ─────────────────────────────────────────────────────────
+# ─── Static Files & Samples ────────────────────────────────────────────────────
 
 @app.route("/")
 def index():
@@ -38,7 +38,6 @@ def index():
 @app.route("/<path:filename>")
 def static_files(filename):
     return send_from_directory(FRONTEND_DIR, filename)
-
 
 # ─── Health Check ────────────────────────────────────────────────────────────
 

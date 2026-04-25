@@ -1,90 +1,61 @@
-# Plag Check
+# Plagiarism Checker
 
 ![Status](https://img.shields.io/badge/Status-Deployment%20Ready-success)
-![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Flask](https://img.shields.io/badge/Backend-Flask-black)
 
-A simple web app to check copied content in documents.
-It detects both exact copying and rewritten (paraphrased) text.
-
-**Supports:**
-PDF, Word (.docx), and scanned/handwritten files (OCR)
-
----
-
-## How it works
-
-* Upload documents
-* Extracts text (direct or using OCR for scanned files)
-* Compares content using:
-
-  * word match
-  * meaning match
-  * pattern match
-* Shows similarity score with High / Medium / Low level
-
----
-
-## Tech
-
-* **Backend:** Python, Flask
-* **AI/ML:** Scikit-learn, Sentence Transformers
-* **OCR:** OpenCV, Tesseract
-* **Frontend:** HTML, CSS, JavaScript
-
----
-
-## Deployment on Render
-This app is configured for native deployment on Render via Docker.
-1. Connect your repository to Render.
-2. Render will automatically detect the `render.yaml` or `Dockerfile`.
-3. It installs necessary system packages (Tesseract, OpenCV gl dependencies) seamlessly.
-
----
-
-## Run Locally
-
-```bash
-git clone https://github.com/shashank-gt/Plagiarism-Checker.git
-cd Plagiarism-Checker
-pip install -r requirements.txt
-python app.py
-```
-
-Open: [http://localhost:5000](http://localhost:5000)
-
----
-
-## Structure
-
-```
-app.py
-plagiarism_engine.py
-text_extractor.py
-frontend/
-Dockerfile
-render.yaml
-Procfile
-```
-
----
-
-## Testing
-
-```bash
-python generate_samples.py
-```
-
----
+A fast, lightweight web application that detects copied or paraphrased content across multiple documents. It works seamlessly with PDFs, Word Documents, and even scanned images.
 
 ## Features
-
-* Detects copied + paraphrased text
-* Works on scanned files
-* Clear similarity score
-* Simple UI
+* **Multi-Format Support:** Read text from `.pdf`, `.docx`, and scanned image PDFs.
+* **Smart Detection:** Catches exact matches, paraphrased text (meaning match), and structural similarities.
+* **Built-in OCR:** Uses Tesseract to read text from handwriting and scanned documents.
+* **Live Demo:** Try out the included sample documents instantly.
 
 ---
 
-## Author
-Shashank H K
+## 🚀 How to Run Locally
+
+### Step 1: Install Dependencies
+Make sure you have Python installed. Then, open your terminal in the project folder and run:
+```bash
+pip install -r requirements.txt
+```
+
+### Step 2: Install System Tools (For Scanned PDFs)
+To process images and scanned PDFs, you need to install Tesseract OCR and Poppler:
+* **Windows:** 
+  * Install [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki) (it should be in `C:\Program Files\Tesseract-OCR\tesseract.exe`).
+  * Install [Poppler](https://github.com/oschwartz10612/poppler-windows/releases) and add its `bin` folder to your system PATH.
+* **Linux (Ubuntu/Debian):**
+  ```bash
+  sudo apt-get update
+  sudo apt-get install tesseract-ocr poppler-utils
+  ```
+
+### Step 3: Start the Application
+Run the Flask server:
+```bash
+python app.py
+```
+Open `http://localhost:5000` in your web browser.
+
+---
+
+## 🌐 How to Deploy (Render / Docker)
+
+This application is completely production-ready and dockerized.
+
+1. Create a new **Web Service** on Render or your favorite hosting platform.
+2. Connect this GitHub repository.
+3. Choose **Docker** as the runtime environment.
+4. The platform will automatically install all necessary system packages (Poppler, Tesseract) and start the app. No extra configuration needed!
+
+---
+
+## 🛠️ Built With
+
+* **Backend:** Python, Flask
+* **AI & NLP:** Scikit-learn (TF-IDF), Sentence-Transformers
+* **OCR & Vision:** OpenCV, Tesseract, pdf2image
+* **Frontend:** Vanilla HTML, CSS, JavaScript

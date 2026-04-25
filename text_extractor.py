@@ -17,10 +17,16 @@ from pdf2image import convert_from_path, convert_from_bytes
 from PIL import Image
 import docx
 
-# ─── Tesseract Path (Windows) ───────────────────────────────────────────────
-TESSERACT_CMD = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-if os.path.exists(TESSERACT_CMD):
-    pytesseract.pytesseract.tesseract_cmd = TESSERACT_CMD
+import platform
+
+# ─── Tesseract Path (Windows vs Linux) ──────────────────────────────────────
+if platform.system() == "Windows":
+    TESSERACT_CMD = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    if os.path.exists(TESSERACT_CMD):
+        pytesseract.pytesseract.tesseract_cmd = TESSERACT_CMD
+else:
+    # On Linux/Docker, assuming tesseract is installed in system PATH
+    pass
 
 OCR_THRESHOLD = 80  # characters; below this we fall back to OCR
 

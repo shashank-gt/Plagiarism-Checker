@@ -42,8 +42,10 @@ if (loadSamplesBtn) {
   loadSamplesBtn.addEventListener("click", async (e) => {
     e.stopPropagation();
     const sampleFiles = [
-      "samples/xample1.pdf",
-      "samples/xample2.pdf"
+      "samples/xampleC-llm.pdf",
+      "samples/xampleC-pds.pdf",
+      "samples/xampleG-llm.pdf",
+      "samples/xampleG-pds.pdf"
     ];
     
     selectedFiles = [];
@@ -58,12 +60,24 @@ if (loadSamplesBtn) {
       
       for (const url of sampleFiles) {
         const resp = await fetch(baseUrl + "/" + url);
-        if (!resp.ok) throw new Error("Failed to load " + url);
+        if (!resp.ok) {
+           console.warn("Could not load sample: " + url);
+           continue;
+        }
         const blob = await resp.blob();
         const filename = url.split("/").pop();
-        const file = new File([blob], filename, { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-        // Setting a fake property to pass 'isAllowed' check which uses file.name
+        
+        let fileType = "application/pdf";
+        if (filename.endsWith(".docx")) {
+            fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+        }
+        
+        const file = new File([blob], filename, { type: fileType });
         fetchedFiles.push(file);
+      }
+      
+      if (fetchedFiles.length < 2) {
+         throw new Error("Not enough samples found.");
       }
       
       hideLoader();

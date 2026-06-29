@@ -4,58 +4,51 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Flask](https://img.shields.io/badge/Backend-Flask-black)
 
-A fast, lightweight web application that detects copied or paraphrased content across multiple documents. It works seamlessly with PDFs, Word Documents, and even scanned images.
+This project is a user-friendly plagiarism detection web app built for comparing multiple documents at once.
+It reads text from digital PDFs and Word files, and it can also extract content from scanned or image-based PDFs using OCR.
 
 ## Features
-* **Multi-Format Support:** Read text from `.pdf`, `.docx`, and scanned image PDFs.
-* **Smart Detection:** Catches exact matches, paraphrased text (meaning match), and structural similarities.
-* **Built-in OCR:** Uses Tesseract to read text from handwriting and scanned documents.
-* **Live Demo:** Try out the included sample documents instantly.
+* **Multiple document types:** Supports `.pdf`, `.docx`, and scanned PDF uploads.
+* **Robust similarity checks:** Uses a mix of TF-IDF, n-gram analysis, and lightweight semantic comparison.
+* **OCR support:** Scans images and handwritten text with Tesseract for accurate extraction.
+* **Clean results view:** Returns document previews, page counts, and ranked similarity scores.
 
 ---
 
-## 🚀 How to Run Locally
+## How to Run Locally
 
-### Step 1: Install Dependencies
-Make sure you have Python installed. Then, open your terminal in the project folder and run:
+### Step 1: Install Python Dependencies
+From the project root directory, install the required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 2: Install System Tools (For Scanned PDFs)
-To process images and scanned PDFs, you need to install Tesseract OCR and Poppler:
-* **Windows:** 
-  * Install [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki) (it should be in `C:\Program Files\Tesseract-OCR\tesseract.exe`).
-  * Install [Poppler](https://github.com/oschwartz10612/poppler-windows/releases) and add its `bin` folder to your system PATH.
+### Step 2: Install System Dependencies for OCR
+If you want scanned or image-based PDFs to work correctly, install the required system tools.
+
+* **Windows:**
+  * Install [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki)
+  * Install [Poppler for Windows](https://github.com/oschwartz10612/poppler-windows/releases) and add the `bin` directory to your PATH.
+
 * **Linux (Ubuntu/Debian):**
   ```bash
   sudo apt-get update
   sudo apt-get install tesseract-ocr poppler-utils
   ```
 
-### Step 3: Start the Application
-Run the Flask server:
+### Step 3: Start the App
+Launch the application:
 ```bash
 python app.py
 ```
-Open `http://localhost:5000` in your web browser.
-
----
-
-## 🌐 How to Deploy (Render / Docker)
-
-This application is completely production-ready and dockerized.
-
-1. Create a new **Web Service** on Render or your favorite hosting platform.
-2. Connect this GitHub repository.
-3. Choose **Docker** as the runtime environment.
-4. The platform will automatically install all necessary system packages (Poppler, Tesseract) and start the app. No extra configuration needed!
+Then open `http://localhost:5000` in your browser.
 
 ---
 
 ## 🛠️ Built With
 
 * **Backend:** Python, Flask
-* **AI & NLP:** Scikit-learn (TF-IDF), Sentence-Transformers
-* **OCR & Vision:** OpenCV, Tesseract, pdf2image
-* **Frontend:** Vanilla HTML, CSS, JavaScript
+* **Text analysis:** Scikit-learn
+* **Document extraction:** PyPDF2, python-docx
+* **OCR / image processing:** Tesseract, OpenCV, pdf2image
+* **Frontend:** HTML, CSS, JavaScript

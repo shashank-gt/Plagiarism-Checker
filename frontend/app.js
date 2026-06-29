@@ -85,7 +85,7 @@ if (loadSamplesBtn) {
       runAnalysis(); // Auto-run analysis when samples are loaded
     } catch (error) {
       hideLoader();
-      showError("Failed to load sample files. Make sure they exist on the server.");
+      showError("Failed to load sample files. Ensure the Flask server is running on port 5000 (python app.py). Error: " + error.message);
     }
   });
 }
@@ -216,7 +216,7 @@ async function runAnalysis() {
     }
   } catch (err) {
     hideLoader();
-    showError("Could not reach the server. Please check your connection and try again.");
+    showError("Could not reach the server. Please check your connection and try again. Details: " + err.message);
   } finally {
     // Re-enable button
     analyzeBtn.disabled = false;

@@ -3,7 +3,7 @@ plagiarism_engine.py
 --------------------
 Multi-method NLP similarity engine:
   1. TF-IDF + Cosine Similarity  (lexical)
-  2. Sentence-Transformers        (semantic / paraphrase-aware)
+  2. Lightweight semantic proxy  (deployment-friendly fallback)
   3. Jaccard on character n-grams (structural / copy-paste detection)
 
 Final score = weighted ensemble of all three methods.
@@ -14,10 +14,6 @@ import string
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
-# Lazy-load heavy model to avoid import-time delay
-_sentence_model = None
-_sentence_model_loaded = False
 
 # ─── Weights ─────────────────────────────────────────────────────────────────
 WEIGHT_TFIDF     = 0.40
@@ -61,34 +57,21 @@ def _tfidf_similarity(texts: list[str]) -> np.ndarray:
 
 
 def _semantic_similarity(texts: list[str]) -> np.ndarray:
-    """Semantic similarity using sentence-transformers (MiniLM)."""
-    global _sentence_model, _sentence_model_loaded
+    """Lightweight semantic proxy that avoids large model downloads."""
     n = len(texts)
 
-    if not _sentence_model_loaded:
-        try:
-            import torch
-            from sentence_transformers import SentenceTransformer
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-            _sentence_model = SentenceTransformer("all-mpnet-base-v2", device=device)
-            _sentence_model_loaded = True
-            print(f"[INFO] Sentence-Transformers model loaded on {device}.")
-        except Exception as e:
-            print(f"[WARN] Sentence-Transformers unavailable: {e}. Skipping semantic scoring.")
-            _sentence_model_loaded = True  # mark as attempted
-
-    if _sentence_model is None:
-        return np.zeros((n, n))
-
     try:
-        # Truncate long documents for encoder efficiency (model max is 512 tokens)
-        truncated = [t[:4000] for t in texts]
-        embeddings = _sentence_model.encode(truncated, show_progress_bar=False, normalize_embeddings=True)
-        sim = embeddings @ embeddings.T  # cosine sim since normalized
-        sim = np.clip(sim, 0, 1)
-        return sim
+        vectorizer = TfidfVectorizer(
+            analyzer="char",
+            ngram_range=(3, 5),
+            min_df=1,
+            sublinear_tf=True,
+        )
+        embeddings = vectorizer.fit_transform(texts)
+        sim = cosine_similarity(embeddings)
+        return np.clip(sim, 0, 1)
     except Exception as e:
-        print(f"[WARN] Semantic similarity failed: {e}")
+        print(f"[WARN] Lightweight semantic similarity failed: {e}")
         return np.zeros((n, n))
 
 

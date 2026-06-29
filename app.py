@@ -131,7 +131,8 @@ def analyze():
 if __name__ == "__main__":
     print("="*60)
     print("  Plag Check System")
-    port = 5000
-    print(f"  http://localhost:{port}")
+    port = int(os.environ.get("PORT", 5000))
+    host = os.environ.get("HOST", "0.0.0.0")
+    print(f"  http://{host}:{port}")
     print("="*60)
-    app.run(host="127.0.0.1", port=port, debug=True)
+    app.run(host=host, port=port, debug=False)
